@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
-import { init, miniApp } from '@telegram-apps/sdk';
+import { init, miniApp, sendData } from '@telegram-apps/sdk';
 
 const initializeTelegramSDK = async () => {
   try {
@@ -13,6 +13,8 @@ const initializeTelegramSDK = async () => {
       await miniApp.ready();
       console.log('Mini App готов.');
     }
+
+    console.log(sendData.isAvailable());
   } catch (error) {
     console.log('Ошибка инициализации: ', error);
   }
