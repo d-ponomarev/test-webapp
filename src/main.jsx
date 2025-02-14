@@ -1,30 +1,32 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import App from './App.jsx';
 
-import { init, miniApp, sendData } from '@telegram-apps/sdk';
-
-const initializeTelegramSDK = async () => {
+const initializeTelegramWebApp = () => {
   try {
-    await init();
+    // Инициализация Telegram Web App
+    Telegram.WebApp.ready();
 
-    if (miniApp.ready.isAvailable()) {
-      await miniApp.ready();
-      console.log('Mini App готов.');
+    console.log('Mini App готов.');
+
+    // Проверка доступности функции sendData
+    if (Telegram.WebApp.sendData) {
+      console.log('Функция sendData доступна.');
+    } else {
+      console.log('Функция sendData недоступна.');
     }
-
-    console.log(sendData.isAvailable());
-    sendData('my-data-goes-here');
   } catch (error) {
     console.log('Ошибка инициализации: ', error);
   }
 };
 
-initializeTelegramSDK();
+// Инициализация Telegram Web App
+initializeTelegramWebApp();
 
+// Рендер React-приложения
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
   </StrictMode>,
-)
+);
