@@ -15,6 +15,7 @@ const initializeTelegramSDK = async () => {
     }
 
     console.log(sendData.isAvailable());
+    sendData('my-data-goes-here');
   } catch (error) {
     console.log('Ошибка инициализации: ', error);
   }
